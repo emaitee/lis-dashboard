@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Label, FormGroup } from "reactstrap";
+import { Input, Label, FormGroup } from "react-bootstrap";
 import { checkStrEmpty } from "utils";
 // import { secondaryColor } from "variables";
 

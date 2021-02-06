@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa";
 import { useLocation } from "react-router";
-// import { Card, CardFooter, CardHeader } from "reactstrap";
-import CardBody from "reactstrap/lib/CardBody";
+// import { Card, CardFooter, CardHeader } from "react-bootstrap";
+import CardBody from "react-bootstrap/lib/CardBody";
 import { themeClass } from "variables";
 
 function FormWrapper(props) {
@@ -16,7 +16,7 @@ function FormWrapper(props) {
     loading = false,
   } = props;
   const [step, setStep] = useState(0);
-  const location = useLocation()
+  const location = useLocation();
 
   const goNext = () => {
     setStep((prev) => prev + 1);
@@ -55,23 +55,26 @@ function FormWrapper(props) {
           </CustomButton>
         )}
         {step === steps.length - 1 ? (
-          location.pathname === "/general-takaful/proposals/motor-takaful/new" ?
-          <CustomButton
-            className="px-6"
-            color="primary"
-            onClick={handleSubmit}
-            loading={loading}
-          >
-            <FaCheck className="mr-1" size={20} /> POST
-          </CustomButton> : 
-          <CustomButton
-          className="px-6"
-          color="primary"
-          onClick={handleSubmit}
-          loading={loading}
-        >
-          <FaCheck className="mr-1" size={20} /> Submit
-        </CustomButton>
+          location.pathname ===
+          "/general-takaful/proposals/motor-takaful/new" ? (
+            <CustomButton
+              className="px-6"
+              color="primary"
+              onClick={handleSubmit}
+              loading={loading}
+            >
+              <FaCheck className="mr-1" size={20} /> POST
+            </CustomButton>
+          ) : (
+            <CustomButton
+              className="px-6"
+              color="primary"
+              onClick={handleSubmit}
+              loading={loading}
+            >
+              <FaCheck className="mr-1" size={20} /> Submit
+            </CustomButton>
+          )
         ) : (
           <CustomButton className="px-6" color="primary" onClick={goNext}>
             Next <AiOutlineRight className="ml-1" size={20} />

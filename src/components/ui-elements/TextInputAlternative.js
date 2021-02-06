@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Label, FormGroup } from "reactstrap";
+import { Input, Label, FormGroup } from "react-bootstrap";
 // import { secondaryColor } from "variables";
 
 function TextInput(props) {
@@ -9,7 +9,7 @@ function TextInput(props) {
     <FormGroup>
       <Label className="font-weight-bold">{label}</Label>
       <Input
-          className='form-control-alternative'
+        className="form-control-alternative"
         // style={{ border: `1px solid ${secondaryColor}`, ...props.style }}
         {...props}
       />

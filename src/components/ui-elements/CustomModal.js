@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal } from "reactstrap";
+import { Button, Modal } from "react-bootstrap";
 
 function CustomModal(props) {
   const {
@@ -32,7 +32,7 @@ function CustomModal(props) {
       </div>
       <div className="modal-body">
         <div className="py-3 text-center">
-          <i className="ni ni-check-bold ni-3x" color={color}/>
+          <i className="ni ni-check-bold ni-3x" color={color} />
           <h4 className="heading mt-4">{message}</h4>
         </div>
         {props.children}

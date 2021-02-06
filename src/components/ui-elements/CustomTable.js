@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "reactstrap";
+import { Table } from "react-bootstrap";
 import { checkStrEmpty } from "utils/index";
 import { themeClass } from "variables";
 

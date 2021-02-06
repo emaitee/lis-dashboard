@@ -1,6 +1,6 @@
 import React from "react";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { FormGroup, Label } from "reactstrap";
+import { FormGroup, Label } from "react-bootstrap";
 
 function Autocomplete(props) {
   const { required, label, _ref } = props;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "reactstrap";
+import { Input } from "react-bootstrap";
 // import { themeClass } from "variables";
 
 function RadioBox(props) {
@@ -13,7 +13,10 @@ function RadioBox(props) {
         id={`${props.label}${props.name}-1`}
         type="radio"
       />
-      <label className="custom-control-label" htmlFor={`${props.label}${props.name}-1`}>
+      <label
+        className="custom-control-label"
+        htmlFor={`${props.label}${props.name}-1`}
+      >
         {label}
       </label>
     </div>

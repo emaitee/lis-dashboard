@@ -1,7 +1,7 @@
 import React from "react";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { Col } from "reactstrap";
-import Label from "reactstrap/lib/Label";
+import { Col } from "react-bootstrap";
+import Label from "react-bootstrap/lib/Label";
 
 export default function CustomTypeahead(props) {
   const {

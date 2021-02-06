@@ -1,5 +1,5 @@
 import React from "react";
-import { FormGroup, Input, Label } from "reactstrap";
+import { FormGroup, Input, Label } from "react-bootstrap";
 
 function SelectInput(props) {
   const { label, options, className } = props;

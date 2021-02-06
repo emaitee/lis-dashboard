@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "reactstrap";
+import { Input } from "react-bootstrap";
 // import { themeClass } from "variables";
 
 function Checkbox(props) {
