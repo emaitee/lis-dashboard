@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa";
+import { Search } from "react-feather";
 import { TextInput } from ".";
 import "./search.css";
 
@@ -18,7 +18,7 @@ export default function SearchBar(props) {
   return (
     <div className="form-group has-search">
       <span className="form-control-feedback">
-        <FaSearch />
+        <Search />
       </span>
       <TextInput
         ref={_ref}

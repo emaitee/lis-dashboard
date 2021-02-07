@@ -1,9 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import TextInput from "components/UI/TextInput";
-import { RadioGroup, SelectInput } from ".";
+import { RadioGroup, SelectInput,TextInput } from ".";
 import Checkbox from "./CheckBox";
-import SwitchButton from "hooks/Switch";
 
 function CustomForm({
   fields = [],
@@ -63,8 +61,8 @@ function CustomForm({
               {el.component()}
             </Col>
           );
-        } else if (el.type === "switch") {
-          return <SwitchButton />;
+        // } else if (el.type === "switch") {
+        //   return <SwitchButton />;
         } else {
           return (
             <Col md={{ size: el.col || 4, offset: el.offset || "" }} key={i}>

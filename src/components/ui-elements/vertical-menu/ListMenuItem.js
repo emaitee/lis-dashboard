@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
-import { primaryColor } from "variables";
+import { primaryColor } from "../../variables";
 
 function ListMenuItem(props) {
   const location = useLocation();

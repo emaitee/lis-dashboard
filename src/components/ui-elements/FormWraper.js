@@ -1,12 +1,10 @@
 import { CustomButton } from "components/UI";
 import { StepBar } from "components/UI";
 import React, { useState } from "react";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { FaCheck } from "react-icons/fa";
+import { Check,ArrowLeft,ArrowRight } from "react-feather";
 import { useLocation } from "react-router";
-// import { Card, CardFooter, CardHeader } from "react-bootstrap";
-import CardBody from "react-bootstrap/lib/CardBody";
-import { themeClass } from "variables";
+import { Card } from "react-bootstrap";
+import { themeClass } from "../../variables";
 
 function FormWrapper(props) {
   const {
@@ -38,7 +36,7 @@ function FormWrapper(props) {
         />
       </center>
       {/* </CardHeader> */}
-      <CardBody>{props.children.filter((item, i) => step === i)}</CardBody>
+      <Card.Body>{props.children.filter((item, i) => step === i)}</Card.Body>
       <div
         className={`m-0 p-0 d-flex flex-row ${
           step !== 0 ? "justify-content-between" : "justify-content-end"
@@ -51,7 +49,7 @@ function FormWrapper(props) {
             color="primary"
             onClick={goBack}
           >
-            <AiOutlineLeft className="mr-1" size={20} /> Back
+            <ArrowLeft className="mr-1" size={20} /> Back
           </CustomButton>
         )}
         {step === steps.length - 1 ? (
@@ -63,7 +61,7 @@ function FormWrapper(props) {
               onClick={handleSubmit}
               loading={loading}
             >
-              <FaCheck className="mr-1" size={20} /> POST
+              <Check className="mr-1" size={20} /> POST
             </CustomButton>
           ) : (
             <CustomButton
@@ -77,7 +75,7 @@ function FormWrapper(props) {
           )
         ) : (
           <CustomButton className="px-6" color="primary" onClick={goNext}>
-            Next <AiOutlineRight className="ml-1" size={20} />
+            Next <ArrowRight className="ml-1" size={20} />
           </CustomButton>
         )}
       </div>

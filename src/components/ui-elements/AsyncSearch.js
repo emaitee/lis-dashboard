@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Fragment } from "react";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
-import { FaSearch } from "react-icons/fa";
+import { Search } from "react-feather";
 import { api_url } from "redux/actions";
 import { checkStrEmpty } from "utils/index";
 
@@ -31,7 +31,7 @@ function AsyncSearch(props) {
   return (
     <div className="form-group has-search">
       <span className="form-control-feedback">
-        <FaSearch />
+        <Search />
       </span>
       <AsyncTypeahead
         // ref={props._ref}

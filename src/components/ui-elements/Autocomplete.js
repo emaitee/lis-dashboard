@@ -1,16 +1,16 @@
 import React from "react";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { FormGroup, Label } from "react-bootstrap";
+import { InputGroup } from "react-bootstrap";
 
 function Autocomplete(props) {
   const { required, label, _ref } = props;
   return (
-    <FormGroup>
+    <InputGroup>
       {label && label !== "" ? (
-        <Label className="font-weight-bold">
+        <InputGroup.Text className="font-weight-bold">
           {label}
           {required && <span className="text-danger">*</span>}
-        </Label>
+        </InputGroup.Text>
       ) : null}
       <Typeahead
         id={`${props.label}-12`}
@@ -18,7 +18,7 @@ function Autocomplete(props) {
         className={`border border-primary rounded ${props.className}`}
         {...props}
       />
-    </FormGroup>
+    </InputGroup>
   );
 }
 

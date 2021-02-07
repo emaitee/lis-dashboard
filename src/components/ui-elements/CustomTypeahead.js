@@ -1,7 +1,6 @@
 import React from "react";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { Col } from "react-bootstrap";
-import Label from "react-bootstrap/lib/Label";
+import { Col, InputGroup } from "react-bootstrap";
 
 export default function CustomTypeahead(props) {
   const {
@@ -17,7 +16,7 @@ export default function CustomTypeahead(props) {
   return (
     <>
       <Col md={col || 4}>
-        <Label className="font-weight-bold">{label}</Label>
+        <InputGroup.Text className="font-weight-bold">{label}</InputGroup.Text>
         <Typeahead
           id="basic-typeahead-single"
           labelKey={labelKey}

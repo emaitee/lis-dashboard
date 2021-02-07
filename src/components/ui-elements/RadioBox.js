@@ -1,13 +1,13 @@
 import React from "react";
-import { Input } from "react-bootstrap";
-// import { themeClass } from "variables";
+import { Form } from "react-bootstrap";
+// import { themeClass } from "../../variables";
 
 function RadioBox(props) {
   const { container = "", label = "" } = props;
 
   return (
     <div className={`custom-control custom-radio mb-3 ${container}`}>
-      <Input
+      <Form.Check
         {...props}
         className="custom-control-input custom-control-input-default"
         id={`${props.label}${props.name}-1`}

@@ -1,5 +1,5 @@
 import React from "react";
-import { themeClass } from "variables";
+import { themeClass } from "../../variables";
 import { RadioBox } from ".";
 
 function RadioGroup(props) {

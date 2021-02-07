@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { checkStrEmpty } from "utils/index";
-import { themeClass } from "variables";
+import { themeClass } from "../../variables";
 
 function CustomTable(props) {
   const { fields = [], data = [], className = "" } = props;

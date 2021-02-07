@@ -1,14 +1,14 @@
 import React from "react";
-import { FormGroup, Input, Label } from "react-bootstrap";
+import { InputGroup, FormControl } from "react-bootstrap";
 
 function SelectInput(props) {
   const { label, options, className } = props;
   return (
-    <FormGroup>
+    <InputGroup>
       {label && label !== "" ? (
-        <Label className="font-weight-bold">{label}</Label>
+        <InputGroup.Text className="font-weight-bold">{label}</InputGroup.Text>
       ) : null}
-      <Input
+      <FormControl
         type="select"
         className={`form-control-alternative border border-primary ${className}`}
         {...props}
@@ -19,8 +19,8 @@ function SelectInput(props) {
             {item}
           </option>
         ))}
-      </Input>
-    </FormGroup>
+      </FormControl>
+    </InputGroup>
   );
 }
 

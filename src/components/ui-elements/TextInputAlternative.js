@@ -1,19 +1,19 @@
 import React from "react";
-import { Input, Label, FormGroup } from "react-bootstrap";
-// import { secondaryColor } from "variables";
+import {  InputGroup,FormControl } from "react-bootstrap";
+// import { secondaryColor } from "../../variables";
 
 function TextInput(props) {
   const { label } = props;
 
   return (
-    <FormGroup>
-      <Label className="font-weight-bold">{label}</Label>
-      <Input
+    <InputGroup>
+      <InputGroup.Text className="font-weight-bold">{label}</InputGroup.Text>
+      <FormControl
         className="form-control-alternative"
         // style={{ border: `1px solid ${secondaryColor}`, ...props.style }}
         {...props}
       />
-    </FormGroup>
+    </InputGroup>
   );
 }
 

@@ -10,7 +10,7 @@ function CustomModal(props) {
     color = "primary",
   } = props;
   return (
-    <Modal
+    <Modal.Dialog
       className="modal-dialog-centered modal-primary"
       contentClassName="bg-gradient-primary"
       isOpen={isOpen}
@@ -51,7 +51,7 @@ function CustomModal(props) {
           Proceed to proposal
         </Button>
       </div>
-    </Modal>
+    </Modal.Dialog>
   );
 }
 
