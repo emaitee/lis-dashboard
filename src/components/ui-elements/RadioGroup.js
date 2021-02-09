@@ -14,13 +14,14 @@ function RadioGroup(props) {
 
   return (
     <div className={container}>
-      <h6 className={"font-weight-bold" + themeClass}>{label}</h6>
-
-      <div className="d-flex flex-row">
-        {/* {JSON.stringify({name, value})} */}
+      <h6 className={"font-weight-bold"}>{label}</h6>
+      <br />
+      <div className="row">
+        {/* {JSON.stringify({ name, value })} */}
         {options.map((_item, _i) => (
           <RadioBox
-            container="mx-4"
+            key={_i}
+            container="col-md-6"
             label={_item.label}
             name={name}
             checked={_item.name === value}
