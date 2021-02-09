@@ -1,32 +1,27 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 // import { themeClass } from "../../variables";
 
 function RadioBox(props) {
   const { container = "", label = "" } = props;
 
   return (
-    <div className={`custom-control custom-radio mb-3 ${container}`}>
-      <Form.Check
-        {...props}
-        className="custom-control-input custom-control-input-default"
-        id={`${props.label}${props.name}-1`}
-        type="radio"
-      />
-      <label
-        className="custom-control-label"
-        htmlFor={`${props.label}${props.name}-1`}
-      >
-        {label}
-      </label>
+    <div className={`${container}`}>
+      <div className="custom-control custom-radio">
+        <input
+          type="radio"
+          id={"m-radio" + props.label}
+          className="custom-control-input"
+          {...props}
+        />
+        <label
+          className="custom-control-label"
+          htmlFor={"m-radio" + props.label}
+        >
+          {label}
+        </label>
+      </div>
     </div>
-    // <Label
-    //   className={`font-weight-bold ${container}`}
-    //   style={{ cursor: "pointer" }}
-    // >
-    //   <Input type="radio" />
-    //   {label}
-    // </Label>
   );
 }
 

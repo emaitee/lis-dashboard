@@ -1,46 +1,80 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
-import { RadioGroup, SelectInput,TextInput } from ".";
+import { RadioGroup, SelectInput, TextInput } from ".";
+import ToggleButton from "./ToggleButton";
 import Checkbox from "./CheckBox";
+import classNames from "classnames";
+import ToggleSwitch from "./toggle-switch/ToggleSwitch";
 
 function CustomForm({
   fields = [],
   handleChange = (f) => f,
   handleRadioChange = (f) => f,
+  handleSwitchChange = (f) => f,
 }) {
   return (
-    <Row className="m-0">
+    <div className="row m-0">
       {fields.map((el, i) => {
         if (el.type && el.type === "select") {
           return (
-            <Col md={{ size: el.col || 4, offset: el.offset || "" }} key={i}>
+            <div
+              className={classNames([
+                `col-md-${el.col || 4} offset-md-${el.offset || ""}`,
+              ])}
+              key={i}
+            >
               <SelectInput
                 label={el.label}
                 name={el.name}
-                value={el.value}
+                value={el.value || ""}
                 options={el.options || []}
                 required={el.required}
                 disabled={el.disabled}
                 onChange={handleChange}
               />
-            </Col>
+            </div>
           );
         } else if (el.type && el.type === "radio") {
           return (
-            <Col md={{ size: el.col || 4, offset: el.offset || "" }} key={i}>
+            <div
+              className={classNames([
+                `col-md-${el.col || 4} offset-md-${el.offset || ""}`,
+              ])}
+              key={i}
+            >
               <RadioGroup
-                container="d-flex flex-row"
+                container="row"
                 label={el.label}
                 name={el.name}
                 options={el.options}
                 onChange={handleRadioChange}
                 value={el.value}
               />
-            </Col>
+            </div>
+          );
+        } else if (el.type === "switch") {
+          return (
+            <div
+              className={classNames([
+                `col-md-${el.col || 4} offset-md-${el.offset || ""}`,
+              ])}
+            >
+              <ToggleSwitch
+                container="d-flex flex-row"
+                name={el.name}
+                options={el.options}
+                onChange={handleSwitchChange}
+                value={el.value}
+                label={el.label}
+              />
+            </div>
           );
         } else if (el.type && el.type === "checkbox") {
           return (
-            <Col md={{ size: el.col || 4, offset: el.offset || "" }} key={i}>
+            <div
+              className={classNames([
+                `col-md-${el.col || 4} offset-md-${el.offset || ""}`,
+              ])}
+            >
               <Checkbox
                 container="d-flex flex-row"
                 label={el.label}
@@ -49,23 +83,29 @@ function CustomForm({
                 onChange={handleRadioChange}
                 value={el.value}
               />
-            </Col>
+            </div>
           );
         } else if (el.type && el.type === "custom") {
           return (
-            <Col
-              className={el.container}
-              md={{ size: el.col || 4, offset: el.offset || "" }}
+            <div
+              className={classNames([
+                `col-md-${el.col || 4} offset-md-${el.offset || ""}`,
+                el.container,
+              ])}
+              md={{ size: el.div || 4, offset: el.offset || "" }}
               key={i}
             >
               {el.component()}
-            </Col>
+            </div>
           );
-        // } else if (el.type === "switch") {
-        //   return <SwitchButton />;
+          // } else if (el.type === "switch") {
+          //   return <SwitchButton />;
         } else {
           return (
-            <Col md={{ size: el.col || 4, offset: el.offset || "" }} key={i}>
+            <div
+              className={`col-md-${el.col || 4} offset-md-${el.offset || ""}`}
+              key={i}
+            >
               <TextInput
                 label={el.label}
                 type={el.type || "text"}
@@ -73,13 +113,14 @@ function CustomForm({
                 value={el.value}
                 required={el.required}
                 disabled={el.disabled}
+                readonly={el.readonly}
                 onChange={handleChange}
               />
-            </Col>
+            </div>
           );
         }
       })}
-    </Row>
+    </div>
   );
 }
 
