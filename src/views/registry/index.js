@@ -67,14 +67,12 @@ function Registry() {
       value: form.in_state_of_origin,
       col: 4,
     },
-
     {
       name: "in_home_domicile",
       label: "Home domicle",
       value: form.in_home_domicile,
       col: 4,
     },
-
     {
       name: "in_type_of_use",
       label: "Type of use",
@@ -251,7 +249,6 @@ function Registry() {
       <Card>
         <Card.Header>Application Frorm</Card.Header>
         <Card.Body>
-          {JSON.stringify(form)}
           <CustomForm
             fields={fields}
             handleChange={handleChange}

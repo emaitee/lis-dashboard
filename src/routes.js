@@ -49,13 +49,6 @@ const dashboardRoutes = [
     component: Registry,
     layout: "/admin",
   },
-  {
-    path: "/table",
-    name: "Table List",
-    icon: "nc-icon nc-notes",
-    component: Appointment,
-    layout: "/admin",
-  },
   // {
   //   path: "/typography",
   //   name: "Typography",
@@ -76,14 +69,7 @@ const dashboardRoutes = [
   //   icon: "nc-icon nc-pin-3",
   //   component: Maps,
   //   layout: "/admin",
-  // },
-  {
-    path: "/apointment",
-    name: "apointment",
-    icon: "nc-icon nc-bell-55",
-    component: Appointment,
-    layout: "/admin",
-  },
+  // },   
   ...authRoutes,
 ];
 

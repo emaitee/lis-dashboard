@@ -168,7 +168,9 @@ class Login extends Component {
               <div className="bottom text-center mb-5">
                 <p href="#" className="sm-text mx-auto mb-3">
                   Don't have an account?
-                  <button className="btn btn-white ml-2">Create new</button>
+                  <Link to="/auth/signup" className="btn btn-white ml-2">
+                    Create new
+                  </Link>
                 </p>
               </div>
             </div>

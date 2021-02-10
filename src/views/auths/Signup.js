@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import { Link } from "react-router-dom";
 class Signup extends React.Component {
   construct() {
     state = {
@@ -192,9 +193,9 @@ class Signup extends React.Component {
                   <div className="text-center w-100">
                     <p className="text-muted font-weight-bold">
                       Already Registered?{" "}
-                      <a href="#" className="text-primary ml-2">
+                      <Link to="/auth/login" className="text-primary ml-2">
                         Login
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>

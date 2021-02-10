@@ -1,15 +1,15 @@
 // import store from '../store';
 //
-// let localEndpoint = "http://localhost:8080/api";
-// let remoteEndpoint = "https://pscprime.com/test/LIS_server/api";
-let remoteEndpoint = "https://land-information-system.herokuapp.com/api";
+let localEndpoint = "http://localhost:8080/api";
+//let remoteEndpoint = "https://pscprime.com/test/LIS_server/api";
+//let remoteEndpoint = "https://land-information-system.herokuapp.com/api";
 
-export const apiURL = remoteEndpoint;
+export const apiURL = localEndpoint;
 
 const _postApi = (url, data = [], success = (f) => f, error = (f) => f) => {
   // const { facilityId } = store.getState().auth.user;
   // data.facilityId = facilityId;
-  fetch(url, {
+  fetch(apiURL + url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
