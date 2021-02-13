@@ -17,8 +17,8 @@ const _postApi = (url, data = [], success = (f) => f, error = (f) => f) => {
     .then((response) => {
       console.log(response);
       if (response.status >= 400) {
-        error(response);
-      } else success(response);
+        error();
+      } else sucresponsecess(response);
     })
     .catch((err) => {
       error(err);

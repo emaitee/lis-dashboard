@@ -8,7 +8,7 @@ import {
   ERRORMESSAGE,
 } from "./type";
 import { apiURL } from "./api";
-// import { useHistory } from 'react-router-dom';
+
 export function signup(objs = {}, success = (f) => f, error = (f) => f) {
   return (dispatch) => {
     dispatch({ type: LOADING_SIGNUP });
@@ -36,14 +36,13 @@ export function signup(objs = {}, success = (f) => f, error = (f) => f) {
                 }
               },
               (err) => {
-                error(err);
                 dispatch({ type: SET_AUTH_ERROR, payload: err });
               }
             )
           );
         } else {
           let msg = Object.values(data)[0];
-          error(msg);
+
           dispatch({ type: SET_AUTH_ERROR, payload: msg });
         }
       })
@@ -67,8 +66,8 @@ export function login(email, password, success, error) {
     fetch(`${apiURL}/users/login`, requestOptions)
       .then((raw) => raw.json())
       .then((data) => {
-        // console.log(data);
-        dispatch({ type: LOADING_LOGIN });
+        console.log({ data });
+        dispatch({ type: LOADING_LOGIN, payload: data });
         if (data.success) {
           const { token } = data;
           getUserProfile(token)
@@ -79,16 +78,14 @@ export function login(email, password, success, error) {
                  * navigate user to dashboard */
                 const { user } = data;
                 dispatch({ type: SET_USER, payload: user });
-                // console.log('got here', user.id);
+                console.log("got here", user.id);
+
                 if (token) {
                   localStorage.setItem("@@bits_lis", JSON.stringify(token));
                 }
-                success(data);
               }
             })
-            .catch((err) => {
-              error();
-            });
+            .catch((err) => {});
         } else {
           dispatch({ type: ERRORMESSAGE, payload: data.msg });
           error(data.error);
@@ -104,17 +101,17 @@ export function login(email, password, success, error) {
 
 export async function getUserProfile(_token) {
   try {
-    // console.log(_token);
-    let response = await fetch(`${apiURL}/user/verify`, {
+    console.log({ _token });
+    let response = await fetch(`${apiURL}/user/profile`, {
       method: "GET",
       headers: {
         authorization: _token,
       },
     });
     let data = await response.json();
+    console.log({ data });
     return data;
   } catch (error) {
-    // console.log(error);
     return error;
   }
 }

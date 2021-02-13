@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import "./login.css";
 import asyncLoginValidate from "./asyncLoginValidate";
 import { reduxForm, Field } from "redux-form";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login } from "../../redux/action/auth";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import logo from "../../assets/img/lis.png";
 import {
   Form,
   FormControl,
@@ -13,8 +15,6 @@ import {
   ControlLabel,
   Col,
   Button,
-  Tooltip,
-  OverlayTrigger,
 } from "react-bootstrap";
 
 class Login extends Component {
@@ -101,6 +101,12 @@ class Login extends Component {
       return <span>{touched && error}</span>;
     }
   }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.auth) {
+      alert("Done");
+      return <Redirect to="/admin/registry" />;
+    }
+  }
   render() {
     const {
       handleSubmit,
@@ -110,8 +116,9 @@ class Login extends Component {
       submitting,
       classes,
       loggingIn,
+      auth,
     } = this.props;
-    console.log(this.props);
+
     return (
       <div className="container px-4 py-5 mx-auto">
         <div className="card card0">
@@ -121,7 +128,7 @@ class Login extends Component {
                 <div className="col-md-8 col-10 my-5">
                   <div className="row justify-content-center px-3 mb-3">
                     {" "}
-                    <img id="logo" src="https://i.imgur.com/PSXxjNY.png" />{" "}
+                    <img id="logo" src={logo} />{" "}
                   </div>
                   <h3 className="mb-5 text-center heading">
                     Log into your account

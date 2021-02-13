@@ -1,37 +1,116 @@
 import React, { useState, useEffect } from "react";
-
+import PropTypes from "prop-types";
+import asyncSignupValidate from "./asyncSignupValidate";
+import { reduxForm, Field } from "redux-form";
 import { Link } from "react-router-dom";
+import { signup } from "../../redux/action/auth";
+import { connect } from "react-redux";
+import {
+  Form,
+  FormControl,
+  FormGroup,
+  ControlLabel,
+  InputGroup,
+  Col,
+  Button,
+} from "react-bootstrap";
+import logo from "../../assets/img/lis.png";
 class Signup extends React.Component {
-  construct() {
-    state = {
-      email: "",
-      password: "",
-      formData: {},
+  constructor(props) {
+    super(props);
+    this.state = {
+      submitted: false,
     };
   }
 
-  saveRememberedMail = () => {
-    localStorage.setItem("@@lis-email", form.email);
-  };
-
-  getRememberedMail = () => {
-    let rememberedUser = localStorage.getItem("@@lis-email") || null;
-    if (rememberedUser) {
-      setForm((prev) => ({ ...prev, email: rememberedUser }));
+  static validate(values) {
+    const errors = {};
+    const requiredFields = ["email", "password"];
+    requiredFields.forEach((field) => {
+      if (!values[field]) {
+        errors[field] = `${field} is required`;
+      }
+    });
+    if (
+      values.password &&
+      (values.password.length < 8 || values.password.length > 32)
+    ) {
+      errors.password = "Password length is between 8 to 32";
     }
-  };
+    if (values.email) {
+      if (
+        values.email.includes("@") &&
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      ) {
+        errors.email = "Invalid email address";
+      }
+      if (
+        values.email.includes(" ") ||
+        !values.email.includes("@") ||
+        values.email.includes("@.")
+      ) {
+        errors.email = "Invalid email address";
+      }
+    }
+    return errors;
+  }
 
-  handleChange = ({ target: { value, name } }) => {
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
+  renderTextField({
+    label,
+    input,
+    meta: { touched, invalid, error },
+    ...custom
+  }) {
+    console.log({ touched, invalid, error });
+    return (
+      <>
+        <span style={{ marginLeft: "10px" }}>{label}</span>
+        <input
+          label={label}
+          placeholder={label}
+          margin="normal"
+          className="form-control"
+          style={{ width: "100%" }}
+          error={touched && invalid}
+          helperText={touched && error}
+          {...input}
+          {...custom}
+        />
+        {touched && error && (
+          <span style={{ marginLeft: "10px", color: "red" }}>{error}</span>
+        )}
+      </>
+    );
+  }
+  submitSignup(props) {
+    this.setState({ submitted: true });
+    console.log({ SUBMIT: props });
+    const { email, password, firstname, lastname, phone, dispatch } = props;
+    const username = email;
+    const name = firstname + " " + lastname;
+    if (email && password) {
+      this.props.dispatch(signup({ email, password, name, phone }));
+    }
+  }
 
-  handleSubmit = (e) => {
-    console.log(erro);
-    e.preventDefault();
-    if (rememberMail) saveRememberedMail();
-  };
+  renderFromHelper({ touched, error }) {
+    if (!(touched && error)) {
+      return;
+    } else {
+      return <span>{touched && error}</span>;
+    }
+  }
 
   render() {
+    const {
+      handleSubmit,
+      pristine,
+      reset,
+      className,
+      submitting,
+      classes,
+    } = this.props;
+
     return (
       <div className="container px-8 py-8 mx-auto">
         <header className="header">
@@ -39,11 +118,7 @@ class Signup extends React.Component {
             <div className="container">
               {/* Navbar Brand */}
               <a href="#" className="navbar-brand">
-                <img
-                  src="https://res.cloudinary.com/mhmd/image/upload/v1571398888/Group_1514_tjekh3_zkts1c.svg"
-                  alt="logo"
-                  width="150"
-                />
+                <h3>Land infortion system</h3>
               </a>
             </div>
           </nav>
@@ -53,7 +128,7 @@ class Signup extends React.Component {
             {/* For Demo Purpose */}
             <div className="col-md-5 pr-lg-5 mb-5 mb-md-0">
               <img
-                src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg"
+                src={logo}
                 alt=""
                 className="img-fluid mb-3 d-none d-md-block"
               />
@@ -66,51 +141,55 @@ class Signup extends React.Component {
 
             {/* Registeration Form */}
             <div className="col-md-7 col-lg-6 ml-auto">
-              <form action="#">
+              <form onSubmit={handleSubmit(this.submitSignup.bind(this))}>
                 <div className="row">
                   {/* First Name */}
-                  <div className="input-group col-lg-6 mb-4">
-                    <input
-                      id="firstName"
-                      type="text"
-                      name="firstname"
-                      placeholder="First Name"
-                      className="form-control bg-white border-left-0 border-md"
-                    />
-                  </div>
+                  <Col className="input-group col-lg-6 mb-4">
+                    <InputGroup>
+                      <Field
+                        name="firstname"
+                        placeholder="First Name"
+                        component={this.renderTextField}
+                        className="form-control bg-white border-md border-left-0 pl-3"
+                      />
+                    </InputGroup>
+                  </Col>
 
                   {/* Last Name */}
-                  <div className="input-group col-lg-6 mb-4">
-                    <input
-                      id="lastName"
-                      type="text"
-                      name="lastname"
-                      placeholder="Last Name"
-                      className="form-control bg-white border-left-0 border-md"
-                    />
-                  </div>
+                  <Col className="input-group col-lg-6 mb-4">
+                    <InputGroup>
+                      <Field
+                        name="lastname"
+                        placeholder="Last Name"
+                        component={this.renderTextField}
+                        className="form-control bg-white border-md border-left-0 pl-3"
+                      />
+                    </InputGroup>
+                  </Col>
 
                   {/* Email Address */}
-                  <div className="input-group col-lg-12 mb-4">
-                    <input
-                      id="email"
-                      type="email"
-                      name="email"
-                      placeholder="Email Address"
-                      className="form-control bg-white border-left-0 border-md"
-                    />
-                  </div>
-
+                  <Col className="input-group col-lg-6 mb-4">
+                    <InputGroup>
+                      <Field
+                        name="email"
+                        placeholder="Email"
+                        component={this.renderTextField}
+                        className="form-control bg-white border-md border-left-0 pl-3"
+                      />
+                    </InputGroup>
+                  </Col>
                   {/* Phone Number */}
-                  <div className="input-group col-lg-12 mb-4">
-                    <input
-                      id="phoneNumber"
-                      type="tel"
-                      name="phone"
-                      placeholder="Phone Number"
-                      className="form-control bg-white border-md border-left-0 pl-3"
-                    />
-                  </div>
+                  <Col className="input-group col-lg-6 mb-4">
+                    <InputGroup>
+                      <Field
+                        name="phone"
+                        placeholder="Phone"
+                        type="number"
+                        component={this.renderTextField}
+                        className="form-control bg-white border-md border-left-0 pl-3"
+                      />
+                    </InputGroup>
+                  </Col>
 
                   {/* Job */}
                   <div className="input-group col-lg-12 mb-4">
@@ -128,34 +207,41 @@ class Signup extends React.Component {
                   </div>
 
                   {/* Password */}
-                  <div className="input-group col-lg-6 mb-4">
-                    <input
-                      id="password"
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      className="form-control bg-white border-left-0 border-md"
-                    />
-                  </div>
+                  <Col className="input-group col-lg-6 mb-4">
+                    <InputGroup>
+                      <Field
+                        name="password"
+                        placeholder="Email"
+                        type="Password"
+                        component={this.renderTextField}
+                        className="form-control bg-white border-md border-left-0 pl-3"
+                      />
+                    </InputGroup>
+                  </Col>
 
                   {/* Password Confirmation */}
-                  <div className="input-group col-lg-6 mb-4">
-                    <input
-                      id="passwordConfirmation"
-                      type="text"
-                      name="passwordConfirmation"
-                      placeholder="Confirm Password"
-                      className="form-control bg-white border-left-0 border-md"
-                    />
-                  </div>
+                  <Col className="input-group col-lg-6 mb-4">
+                    <InputGroup>
+                      <Field
+                        name="passwordConfirmation"
+                        placeholder="Confirm password"
+                        type="password"
+                        component={this.renderTextField}
+                        className="form-control bg-white border-md border-left-0 pl-3"
+                      />
+                    </InputGroup>
+                  </Col>
 
                   {/* Submit Button */}
-                  <div className="form-group col-lg-12 mx-auto mb-0">
-                    <a href="#" className="btn btn-primary btn-block py-2">
-                      <span className="font-weight-bold">
-                        Create your account
-                      </span>
-                    </a>
+                  <div className="row justify-content-center col-lg-6 mb-4">
+                    {" "}
+                    <Button
+                      type="submit"
+                      disabled={pristine || submitting}
+                      className="btn-block btn-color"
+                    >
+                      Signup
+                    </Button>{" "}
                   </div>
 
                   {/* Divider Text */}
@@ -207,5 +293,28 @@ class Signup extends React.Component {
     );
   }
 }
+Signup.defaultProps = {
+  onSubmit: () => {},
+};
+const mapStateToProps = ({ auth }) => {
+  return {
+    auth,
+  };
+};
+Signup.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string),
+  className: PropTypes.string,
+  onSubmit: PropTypes.func,
+};
 
-export default Signup;
+Signup.defaultProps = {
+  onSubmit: () => {},
+};
+
+const connectedPage = connect(mapStateToProps)(Signup);
+export default reduxForm({
+  form: "Signup",
+  fields: ["email", "password", "name", "phone"],
+  validate: Signup.validate,
+  asyncSignupValidate,
+})(connectedPage);
